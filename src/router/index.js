@@ -11,7 +11,10 @@ const routes = [
   {
     path: "/protected",
     name: "protected",
-    component: () => import("@/views/ProtectedShow.vue"),
+    components: {
+      default: () => import("@/views/ProtectedShow.vue"),
+      LeftSidebar: () => import("@/components/LeftSidebar.vue"),
+    },
     meta: {
       requiresAuth: true,
     },
@@ -19,7 +22,10 @@ const routes = [
   {
     path: "/invoices",
     name: "invoices",
-    component: () => import("@/views/InvoicesShow.vue"),
+    components: {
+      default: () => import("@/views/InvoicesShow.vue"),
+      LeftSidebar: () => import("@/components/LeftSidebar.vue"),
+    },
     meta: {
       requiresAuth: true,
     },
@@ -27,6 +33,10 @@ const routes = [
   {
     path: "/login",
     name: "login",
+    component: () => import("@/views/LoginShow.vue"),
+  },
+  {
+    path: "/example/:id",
     component: () => import("@/views/LoginShow.vue"),
   },
   {

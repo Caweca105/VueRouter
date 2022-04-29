@@ -1,7 +1,18 @@
 <template>
   <TheNavigation />
   <div class="container">
-    <router-view v-slot="{ Component }">
+    <!--Sidebar-->
+    <router-view
+      v-slot="{ Component }"
+      class="view left-sidebar"
+      name="LeftSidebar"
+    >
+      <transition name="fade" mode="out-in">
+        <component :is="Component" :key="$route.path"></component>
+      </transition>
+    </router-view>
+    <!--Main-->
+    <router-view v-slot="{ Component }" class="main-view">
       <transition name="fade" mode="out-in">
         <component :is="Component" :key="$route.path"></component>
       </transition>
@@ -20,29 +31,21 @@ export default {
 </script>
 
 <style lang="css">
-.moveUp-enter-active {
-  animation: fadeIn 1s, ease-in;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
 }
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
-.moveUp-leave-active {
-  animation: moveUp 0.3s ease-in;
+.container {
+  display: flex;
 }
-@keyframes moveUp {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-400px);
-  }
+.left-sidebar {
+  width: 20%;
+}
+.main-view {
+  width: 100%;
 }
 </style>
